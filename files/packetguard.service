@@ -1,0 +1,16 @@
+[Unit]
+Description=Discord.js PacketGuard Bot Service
+After=network.target
+
+[Service]
+User=packetloss
+WorkingDirectory=/home/packetloss/packetguard
+ExecStart=/home/packetloss/.local/share/pnpm run start
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=packetguard
+
+[Install]
+WantedBy=multi-user.target

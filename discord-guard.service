@@ -1,0 +1,41 @@
+[Unit]
+Description=Discord Guard Bot
+Documentation=https://github.com/seu-usuario/discord-guard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=discord-guard
+Group=discord-guard
+WorkingDirectory=/opt/discord-guard
+
+# Carrega variáveis de ambiente do arquivo .env
+EnvironmentFile=/opt/discord-guard/.env
+
+# Comando de inicialização (após build)
+ExecStart=/usr/bin/node /opt/discord-guard/dist/index.js
+
+# Reinicia automaticamente em caso de falha
+Restart=always
+RestartSec=10
+StartLimitIntervalSec=120
+StartLimitBurst=5
+
+# Segurança
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/discord-guard/recordings /opt/discord-guard/logs
+
+# Recursos
+LimitNOFILE=65536
+
+# Logs via journald
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=discord-guard
+
+[Install]
+WantedBy=multi-user.target
