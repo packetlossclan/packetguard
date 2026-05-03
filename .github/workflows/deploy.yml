@@ -10,24 +10,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      # - name: Checkout
+      #   uses: actions/checkout@v6
 
-      - name: Instalar pnpm
-        uses: pnpm/action-setup@v5
+      # - name: Instalar pnpm
+      #   uses: pnpm/action-setup@v5
 
-      - name: Instalar Node.js
-        uses: actions/setup-node@v6
+      # - name: Instalar Node.js
+      #   uses: actions/setup-node@v6
+      #   with:
+      #     node-version: 24
+      #     cache: pnpm
+
+      # - name: Instalar dependências
+      #   run: pnpm install
+      #   #run: pnpm install --frozen-lockfile
+
+      # - name: Build
+      #   run: pnpm build
+
+      - uses: actions/checkout@v6
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@v1
         with:
-          node-version: 24
-          cache: pnpm
-
-      - name: Instalar dependências
-        run: pnpm install
-        #run: pnpm install --frozen-lockfile
-
-      - name: Build
-        run: pnpm build
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASS }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "."
+          target: ${{ secrets.PROJECT_PATH }}
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1
