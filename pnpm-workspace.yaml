@@ -1,3 +1,2 @@
 onlyBuiltDependencies:
-  - "@discordjs/opus"
   - esbuild
