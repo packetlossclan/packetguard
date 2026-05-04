@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=packetloss
 WorkingDirectory=/home/packetloss/packetguard
-ExecStart=/home/packetloss/.local/share/pnpm run start
+ExecStart=/home/packetloss/.local/share/pnpm/pnpm run start
 Restart=always
 RestartSec=10
 StandardOutput=syslog
