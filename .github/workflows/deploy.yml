@@ -52,7 +52,6 @@ jobs:
             cd ${{ secrets.PROJECT_PATH }}
             git fetch origin main
             git reset --hard origin/main
-            git clean -fxd
             git clean -fxd -e .env
             cp .env .env.production
             /home/packetloss/.local/share/pnpm/pnpm install 
