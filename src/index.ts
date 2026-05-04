@@ -21,7 +21,7 @@ const client = new Client({
 })
 
 // Bot pronto
-client.once('ready', (c) => {
+client.once('clientReady', (c) => {
   logger.info(`Bot online como ${c.user.tag}`, {
     guildId: config.discord.guildId,
     textModeration: config.moderation.textEnabled,
